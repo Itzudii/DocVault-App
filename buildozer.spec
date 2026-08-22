@@ -7,6 +7,8 @@ package.domain = com.uditya
 source.dir = .
 source.include_exts = py,png,jpg,jpeg,kv,json,atlas
 
+version = 1.0
+
 requirements = python3,kivy,kivymd,plyer
 
 icon.filename = assets/icon.png
