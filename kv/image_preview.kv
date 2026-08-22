@@ -1,0 +1,59 @@
+#:import Image kivy.uix.image.Image
+
+<ImagePreviewScreen>:
+
+    name: "image_preview"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "10dp"
+        spacing: "5dp"
+
+        # Header
+        MDBoxLayout:
+            size_hint_y: None
+            height: "50dp"
+
+            MDIconButton:
+                icon: "arrow-left"
+                on_release:
+                    root.close_pdf()
+                    root.manager.current = "home"
+
+            MDLabel:
+                text: "Document Preview"
+                font_style: "H6"
+                bold: True
+
+        # PDF page
+        Image:
+            id: preview_image
+            source: ""
+            allow_stretch: True
+            keep_ratio: True
+
+        # Page controls
+        MDBoxLayout:
+            size_hint_y: None
+            height: "55dp"
+            spacing: "10dp"
+
+            MDIconButton:
+                id: previous_button
+                icon: "chevron-left"
+                disabled: True
+                on_release:
+                    root.previous_page()
+
+            MDLabel:
+                id: page_label
+                text: ""
+                halign: "center"
+                valign: "middle"
+
+            MDIconButton:
+                id: next_button
+                icon: "chevron-right"
+                disabled: True
+                on_release:
+                    root.next_page()

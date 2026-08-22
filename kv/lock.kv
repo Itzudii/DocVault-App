@@ -1,0 +1,56 @@
+<LockScreen>:
+
+    name: "lock"
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        padding: "30dp"
+        spacing: "20dp"
+
+        Widget:
+
+        MDLabel:
+            text: "🔒"
+            halign: "center"
+            font_style: "H2"
+            size_hint_y: None
+            height: "60dp"
+
+        MDLabel:
+            id: title
+            text: "Unlock DocVault"
+            halign: "center"
+            font_style: "H5"
+            bold: True
+            size_hint_y: None
+            height: "50dp"
+
+        MDTextField:
+            id: pin_field
+            hint_text: "Enter PIN"
+            password: True
+            input_filter: "int"
+            input_type: "number"
+            max_text_length: 4
+            size_hint_y: None
+            height: "55dp"
+
+        MDLabel:
+            id: error_label
+            text: ""
+            halign: "center"
+            theme_text_color: "Error"
+            size_hint_y: None
+            height: "30dp"
+
+        MDRaisedButton:
+            id: action_button
+            text: "UNLOCK"
+            pos_hint: {"center_x": .5}
+            size_hint_y: None
+            height: "50dp"
+            on_release:
+                root.process_pin()
+
+        Widget:

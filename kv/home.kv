@@ -1,0 +1,61 @@
+<HomeScreen>:
+
+    name: "home"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "15dp"
+        spacing: "10dp"
+
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height: "145dp"
+            spacing: "5dp"
+
+            MDLabel:
+                text: "Doc Vault"
+                bold: True
+                font_style: "H4"
+                size_hint_y: None
+                height: "45dp"
+                
+            MDIconButton:
+                icon: "cog"
+                on_release:
+                    root.manager.current = "settings"
+
+            MDTextField:
+                hint_text: "Search documents"
+                icon_left: "magnify"
+                size_hint_y: None
+                height: "50dp"
+                on_text:
+                    root.search_documents(self.text)
+
+            MDLabel:
+                id: document_count
+                text: "0 Documents"
+                theme_text_color: "Secondary"
+                size_hint_y: None
+                height: "30dp"
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+
+            MDBoxLayout:
+                id: documents_container
+                orientation: "vertical"
+                spacing: "10dp"
+                padding: "2dp"
+                size_hint_y: None
+                height: self.minimum_height
+
+        MDFloatingActionButton:
+            icon: "plus"
+            pos_hint: {"right": 0.95}
+            size_hint: None, None
+            size: "56dp", "56dp"
+            on_release:
+                root.manager.current = "add_document"

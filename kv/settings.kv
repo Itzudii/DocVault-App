@@ -1,0 +1,36 @@
+<SettingsScreen>:
+
+    name: "settings"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "15dp"
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "50dp"
+
+            MDIconButton:
+                icon: "arrow-left"
+                on_release:
+                    root.manager.current = "home"
+
+            MDLabel:
+                text: "Settings"
+                font_style: "H5"
+                bold: True
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "60dp"
+
+            MDLabel:
+                text: "🔐 App Lock"
+                font_style: "H6"
+
+            MDSwitch:
+                id: lock_switch
+                pos_hint: {"center_y": .5}
+                on_active:
+                    root.toggle_lock(self.active)

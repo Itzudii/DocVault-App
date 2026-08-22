@@ -1,0 +1,72 @@
+#:import AddDocumentScreen screens.add_document.AddDocumentScreen
+
+<AddDocumentScreen>:
+    name: "add_document"
+    
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "18dp"
+
+        MDBoxLayout:
+            adaptive_height: True
+            spacing: "12dp"
+
+            MDIconButton:
+                icon: "arrow-left"
+                on_release:
+                    root.manager.current = "home"
+
+            MDLabel:
+                text: "Add Document"
+                font_style: "H5"
+                bold: True
+                
+
+        MDCard:
+            radius: [24]
+            md_bg_color: .09,.09,.12,1
+            padding: "25dp"
+            size_hint_y: None
+            height: "300dp"
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: "15dp"
+                pos_hint: {"center_y": .5}
+
+                MDIcon:
+                    icon: "file-document-outline"
+                    font_size: "90sp"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: app.theme_cls.primary_color
+
+                MDLabel:
+                    id: file_name
+                    text: "No File Selected"
+                    halign: "center"
+
+                MDTextButton:
+                    text: "Choose File"
+                    pos_hint: {"center_x": .5}
+                    on_release:
+                        root.choose_file()
+
+        MDTextField:
+            id: custom_name
+            hint_text: "Custom Name"
+            helper_text: "Only this name appears on Home"
+            helper_text_mode: "persistent"
+
+        Widget:
+
+        MDRaisedButton:
+            id: save_btn
+            text: "Save Document"
+            disabled: True
+            pos_hint: {"center_x": .5}
+            size_hint_x: 1
+            md_bg_color: app.theme_cls.primary_color
+            on_release:
+                root.save_document()

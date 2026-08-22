@@ -1,0 +1,11 @@
+__pycache__/
+*.jpg
+*.pdf
+docvault/
+*.db
+*.ipynb
+*.zip
+venv/
+test_pdf_page.png
+test.py
+settings.json
