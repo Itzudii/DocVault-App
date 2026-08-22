@@ -18,6 +18,3 @@ orientation = portrait
 android.api = 35
 android.minapi = 23
 android.arch = arm64-v8a
-
-android.sdk_path = /usr/local/lib/android/sdk
-android.skip_update = True
