@@ -22,42 +22,55 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            git zip unzip autoconf libtool pkg-config \
-            zlib1g-dev libncurses5-dev libncursesw5-dev \
-            cmake libffi-dev libssl-dev
+            git \
+            zip \
+            unzip \
+            autoconf \
+            libtool \
+            pkg-config \
+            zlib1g-dev \
+            libncurses5-dev \
+            libncursesw5-dev \
+            cmake \
+            libffi-dev \
+            libssl-dev
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install Android packages
+      - name: Install Android SDK packages
         run: |
           sdkmanager "platform-tools"
           sdkmanager "platforms;android-35"
           sdkmanager "build-tools;35.0.0"
+          sdkmanager "ndk;27.3.13750724"
 
       - name: Accept Android licenses
         run: |
           yes | sdkmanager --licenses || true
 
+      - name: Set Android NDK
+        run: |
+          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.3.13750724" >> $GITHUB_ENV
+          echo "ANDROID_NDK=$ANDROID_HOME/ndk/27.3.13750724" >> $GITHUB_ENV
+
       - name: Install Buildozer
         run: |
           python -m pip install --upgrade pip
           pip install buildozer
-          pip install cython==0.29.37
+          pip install "cython==0.29.37"
 
-      - name: Configure Buildozer SDK
+      - name: Clean Buildozer
         run: |
-          mkdir -p /usr/local/lib/android
-          ln -s "$ANDROID_HOME" /usr/local/lib/android/sdk
+          rm -rf .buildozer
+          rm -rf bin
 
       - name: Build APK
         run: |
-          mkdir -p "$HOME/.android"
-          touch "$HOME/.android/repositories.cfg"
           buildozer android debug
 
       - name: Upload APK
